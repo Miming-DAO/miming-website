@@ -36,7 +36,11 @@ export function RoadmapSection() {
               <div className="flex-1 flex items-center gap-2">
                 <div className="h-2 rounded flex-1 bg-[#6099b4] min-w-6"></div>
                 <div className="bg-[#5c0f74] rounded-lg flex items-center justify-center w-32">
-                  <img src="/images/miming-cat.png" className="w-20" alt="" />
+                  <img
+                    src="/images/miming-stairs.png"
+                    className="h-20 object-cover"
+                    alt=""
+                  />
                 </div>
                 <div className="w-full lg:w-[350px]">
                   <h3 className="text-lg">Phase 2: The Bridge</h3>
@@ -54,7 +58,11 @@ export function RoadmapSection() {
               <div className="flex-1 flex items-center gap-2 lg:flex-row-reverse">
                 <div className="h-2 rounded flex-1 bg-[#6099b4] min-w-6"></div>
                 <div className="bg-[#5c0f74] rounded-lg flex items-center justify-center w-32">
-                  <img src="/images/miming-cat.png" className="w-20" alt="" />
+                  <img
+                    src="/images/miming-transparent.png"
+                    className="h-20 object-cover"
+                    alt=""
+                  />
                 </div>
                 <div className="w-full lg:w-[350px]">
                   <h3 className="text-lg">Phase 3: The Crossing</h3>
