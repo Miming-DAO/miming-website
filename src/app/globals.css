@@ -23,3 +23,9 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.text-darumadrop {
+  font-family: "Darumadrop One", serif;
+  font-weight: 900;
+  font-style: normal;
+}

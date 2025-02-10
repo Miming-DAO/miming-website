@@ -4,7 +4,9 @@ export function Footer() {
       <div className="py-16 px-4 flex flex-col sm:flex-row items-center justify-between">
         <div className="flex items-center justify-center sm:justify-start">
           <img src="/images/miming-logo.png" className="size-28 sm:size-32" />
-          <span className="text-[2em] font-bold text-[#e50f72]">$MIMING</span>
+          <span className="text-[3em] font-bold text-darumadrop text-[#e50f72]">
+            $MIMING
+          </span>
         </div>
         <div className="flex flex-col items-center sm:items-start">
           <div className="flex flex-col sm:flex-row items-center sm:gap-2 justify-center">
