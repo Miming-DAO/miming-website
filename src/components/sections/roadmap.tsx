@@ -5,9 +5,9 @@ export function RoadmapSection() {
       style={{ backgroundImage: "url('/images/miming-bg-2.png')" }}
       className="min-h-screen bg-no-repeat bg-cover bg-center py-20"
     >
-      <div className="hidden lg:block w-2 rounded bg-[#6099b4] absolute left-4 lg:left-1/2 transform -translate-x-1/2 lg h-full :h-[80%]"></div>
+      <div className="hidden lg:block w-2 rounded bg-[#6099b4] absolute left-4 lg:left-1/2 transform -translate-x-1/2 h-full lg:h-[80%]"></div>
       <div className="container mx-auto px-4">
-        <h2 className="text-[2.3em] lg:text-[3em] mb-4 lg:mb-6 text-accent ml-4">
+        <h2 className="text-[2.3em] lg:text-[3em] mb-4 lg:mb-6 text-accent ml-4 lg:ml-0">
           Roadmap
         </h2>
         <div className="flex">
