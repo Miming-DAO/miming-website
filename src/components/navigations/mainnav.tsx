@@ -6,7 +6,7 @@ export function MainNav() {
   };
 
   return (
-    <ul className="flex items-center gap-10 text-sm text-darumadrop sm:text-xl text-white">
+    <ul className="flex items-center gap-4 sm:gap-10 text-sm text-darumadrop sm:text-xl text-white">
       <li>
         <a
           href="#"
