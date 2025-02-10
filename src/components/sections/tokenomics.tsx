@@ -3,13 +3,13 @@ export function TokenomicsSection() {
     <section
       id="tokenomics"
       style={{ backgroundImage: "url('/images/miming-bg-2.png')" }}
-      className="min-h-screen bg-no-repeat bg-cover bg-center"
+      className="sm:min-h-screen bg-no-repeat bg-cover bg-center"
     >
       <div className="container mx-auto px-4 py-20">
         <h2 className="text-[2.3em] sm:text-[3em] mb-4 sm:mb-6 text-accent">
           Tokenomics
         </h2>
-        <div className="flex gap-4">
+        <div className="flex flex-col sm:flex-row gap-4">
           <div className="w-1/9">
             <div className="flex items-center gap-2 text-accent">
               <img
