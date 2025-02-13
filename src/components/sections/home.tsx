@@ -14,11 +14,11 @@ export function HomeSection() {
             alt=""
           />
           <p>Solana Contract Address:</p>
-          <p>0x12hgfsdf345753fsddfsddsd6rt789</p>
+          <p>TBA</p>
         </div>
         <ul className="flex justify-center items-center mt-2 gap-2">
           <li>
-            <img src="/images/social/x.png" className="size-6" alt="" />
+          <a href="https://x.com/mimingcoin"><img src="/images/social/x.png" className="size-6" alt="" /></a>
           </li>
           <li>
             <a href="#">
@@ -46,10 +46,10 @@ export function HomeSection() {
             </a>
           </li>
           <li>
-            <img src="/images/social/github.png" className="size-6" alt="" />
+            <a href="https://github.com/Miming-DAO"><img src="/images/social/github.png" className="size-6" alt="" /></a>
           </li>
           <li>
-            <img src="/images/social/copy.png" className="size-6" alt="" />
+            <a href="https://drive.google.com/file/d/1m0bjwGnKqHL21GC0izfHvEVQpDExpbFj/view?usp=sharing"><img src="/images/social/copy.png" className="size-6" alt="" /></a>
           </li>
         </ul>
       </div>
