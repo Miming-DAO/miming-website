@@ -12,12 +12,16 @@ export function TokenomicsSection() {
         <div className="flex flex-col sm:flex-row gap-4">
           <div className="w-1/9">
             <div className="flex items-center gap-2 text-accent">
+              <a href="https://drive.google.com/file/d/1m0bjwGnKqHL21GC0izfHvEVQpDExpbFj/view?usp=sharing">
               <img
                 src="/images/social/file-yellow.png"
                 alt=""
                 className="h-6"
               />
+              </a>
+              <a href="https://drive.google.com/file/d/1m0bjwGnKqHL21GC0izfHvEVQpDExpbFj/view?usp=sharing">
               $MIMING Whitepaper
+              </a>
             </div>
           </div>
           <div className="flex-1">
