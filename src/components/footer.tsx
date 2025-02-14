@@ -21,7 +21,7 @@ export function Footer() {
               </a>
             </li>
             <li>
-              <a href="#">
+              <a href="https://t.me/+l8QZJZ9D1UtjYWI1">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   xmlnsXlink="http://www.w3.org/1999/xlink"
