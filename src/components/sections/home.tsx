@@ -13,8 +13,8 @@ export function HomeSection() {
             className="h-4 hidden sm:block"
             alt=""
           />
-          <p>Solana Contract Address:</p>
-          <p>TBA</p>
+          <p>Solana CA:</p>
+          <p><small>2xEdQfv8sZWNRGwm3pT6YM5SVbS5UgdMkfSx29VUC9Dt</small></p>
         </div>
         <ul className="flex justify-center items-center mt-2 gap-2">
           <li>
