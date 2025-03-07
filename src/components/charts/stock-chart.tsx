@@ -2,7 +2,7 @@
 import * as am5 from "@amcharts/amcharts5";
 import * as am5xy from "@amcharts/amcharts5/xy";
 import * as am5stock from "@amcharts/amcharts5/stock";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 export function StockChart() {
   useEffect(() => {
@@ -28,7 +28,7 @@ export function StockChart() {
 
     let dateAxis = mainPanel.xAxes.push(
       am5xy.DateAxis.new(root, {
-        baseInterval: { timeUnit: "minute", count: 1 }, // Adjust based on data granularity
+        baseInterval: { timeUnit: "hour", count: 1 },
         renderer: am5xy.AxisRendererX.new(root, {}),
       })
     );
@@ -65,28 +65,25 @@ export function StockChart() {
     async function fetchData() {
       try {
         const response = await fetch(
-          "https://public-api.birdeye.so/defi/history_price?address=2xEdQfv8sZWNRGwm3pT6YM5SVbS5UgdMkfSx29VUC9Dt&timeframe=1h",
-          {
-            headers: {
-              "X-API-KEY": "5fe1b79c1a1f46a99903d45891431084", // 🔹 Replace with your actual API key
-            },
-          }
+          "https://api.geckoterminal.com/api/v2/networks/solana/pools/GiCFWE4ATRtTpYtQZv1prcitb5V9M1GdonJMLFLxLSa5/ohlcv/hour"
         );
 
-        const data = await response.json();
+        const json = await response.json();
 
-        if (!data.success || !data.data || data.data.length === 0) {
-          console.error("Invalid API response", data);
+        if (!json.data?.attributes?.ohlcv_list) {
+          console.error("Invalid API response", json);
           return;
         }
 
-        const chartData = data.data.map((entry: any) => ({
-          date: entry.t * 1000, // Convert UNIX timestamp to milliseconds
-          open: parseFloat(entry.o),
-          high: parseFloat(entry.h),
-          low: parseFloat(entry.l),
-          close: parseFloat(entry.c),
-        }));
+        const chartData = json.data.attributes.ohlcv_list.map(
+          ([timestamp, open, high, low, close]) => ({
+            date: timestamp * 1000, // Convert UNIX timestamp to milliseconds
+            open: parseFloat(open),
+            high: parseFloat(high),
+            low: parseFloat(low),
+            close: parseFloat(close),
+          })
+        );
 
         candlestickSeries.data.setAll(chartData);
       } catch (error) {
