@@ -39,7 +39,7 @@ interface PriceChange {
 interface liquidity {
   usd: number;
   base: number;
-  h2quote4: number;
+  quote: number;
 }
 
 interface Website {
@@ -76,6 +76,6 @@ export interface TokenDetails {
   liquidity: liquidity;
   fdv: number;
   marketCap: number;
-  pairCreatedAt: number;
+  pairCreatedAt: string;
   info: TokenInfo;
 }

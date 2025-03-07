@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { StockChart } from "../charts/stock-chart";
 import { BuySells, TokenDetails } from "@/models/token-details.model";
 import { getLatestTokenDetails } from "@/services/dexscreener.service";
+import { VersusPercentage } from "../_partials/versus-percentage";
 
 export function ChartSection() {
   const [tokenDetails, setTokenDetails] = useState<TokenDetails | null>(null);
@@ -74,6 +75,30 @@ export function ChartSection() {
       sellPercentage: (activeTxns.sells / total) * 100,
     };
   }, [activeTxns]);
+
+  const formatUSD = (value: number | undefined) => {
+    if (!value) return "N/A";
+    return new Intl.NumberFormat("en-US", {
+      notation: "compact",
+      compactDisplay: "short",
+      maximumFractionDigits: 1,
+    }).format(value);
+  };
+
+  const formatTimeAgo = (timestamp: string | undefined) => {
+    if (!timestamp) return "N/A";
+
+    const createdAt = new Date(timestamp);
+    const now = new Date();
+    const diffMs = now.getTime() - createdAt.getTime();
+
+    const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+    const diffHours = Math.floor(
+      (diffMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+    );
+
+    return `${diffDays}d ${diffHours}h ago`;
+  };
 
   return (
     <div className="bg-gradient-to-r from-[#001036] to-[#8a0439]">
@@ -191,53 +216,75 @@ export function ChartSection() {
                           {activeTxns && activeTxns?.buys + activeTxns?.sells}
                         </span>
                       </div>
-                      <div className="flex-1 p-4 flex justify-between">
-                        <div
-                          className={`flex flex-col`}
-                          style={{
-                            width: `${
-                              txnPercentages.buyPercentage
-                                ? txnPercentages.buyPercentage
-                                : "50"
-                            }%`,
-                          }}
-                        >
-                          <span className="text-xs opacity-50">BUYS</span>
-                          {activeTxns?.buys}
-                          <div className="bg-green-500 h-1 rounded-lg w-full"></div>
-                        </div>
-                        <div
-                          className={`flex flex-col items-end`}
-                          style={{
-                            width: `${
-                              txnPercentages.sellPercentage
-                                ? txnPercentages.sellPercentage
-                                : "50"
-                            }%`,
-                          }}
-                        >
-                          <span className="text-xs opacity-50">SELLS</span>
-                          {activeTxns?.sells}
-                          <div className="bg-red-500 h-1 rounded-lg w-full"></div>
-                        </div>
-                      </div>
+                      <VersusPercentage
+                        label_1="BUYS"
+                        value_1={activeTxns?.buys.toString() || ""}
+                        per_1={
+                          txnPercentages.buyPercentage
+                            ? txnPercentages.buyPercentage
+                            : 50
+                        }
+                        label_2="SELLS"
+                        value_2={activeTxns?.sells.toString() || ""}
+                        per_2={
+                          txnPercentages.sellPercentage
+                            ? txnPercentages.sellPercentage
+                            : 50
+                        }
+                      />
                     </div>
                     <div className="flex">
                       <div className="w-1/3 px-4 border-r border-[#ffffff66] flex flex-col font-bold justify-center items-start">
                         <span className="text-xs opacity-50">VOLUME</span>
                         <span>${activeVolume && activeVolume.toString()}</span>
                       </div>
-                      <div className="flex-1 p-4"></div>
+                      <div></div>
                     </div>
                   </div>
                 </div>
               </div>
+              <div className="p-4 rounded-lg bg-[#ffffff30]">
+                <a
+                  href="https://raydium.io/swap/?outputMint=2xEdQfv8sZWNRGwm3pT6YM5SVbS5UgdMkfSx29VUC9Dt&inputMint=sol"
+                  target="_blank"
+                  className="w-full border rounded-lg py-4 px-4 block text-center bg-white text-[#e50f72] text-xs uppercase font-bold"
+                >
+                  Buy Now
+                </a>
+              </div>
               <div className="p-4 rounded-lg bg-[#ffffff30] flex-1">
-                <h4 className="font-bold text-xl mb-4">Swap</h4>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque
-                laudantium illum autem molestias dolorem eos maxime quas numquam
-                nemo perferendis, sed, minima repudiandae sapiente facilis
-                quisquam, illo architecto consequuntur suscipit?
+                {tokenDetails && (
+                  <div className="flex flex-col">
+                    <div className="flex justify-between items-center gap-4 border-b py-2 border-[#ffffff66]">
+                      <span>Pair created</span>
+                      <span className="font-bold">
+                        {formatTimeAgo(tokenDetails?.pairCreatedAt)}
+                      </span>
+                    </div>
+                    <div className="flex justify-between items-center gap-4 border-b py-2 border-[#ffffff66]">
+                      <span>Pooled MIMING</span>
+                      <div className="flex items-center gap-2">
+                        <span className="font-bold">
+                          {tokenDetails?.liquidity.base}
+                        </span>
+                        <span className="font-bold">
+                          ${formatUSD(tokenDetails?.liquidity.usd / 2)}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="flex justify-between items-center gap-4 border-b py-2 border-[#ffffff66]">
+                      <span>Pooled sol</span>
+                      <div className="flex items-center gap-2">
+                        <span className="font-bold">
+                          {tokenDetails?.liquidity.quote}
+                        </span>
+                        <span className="font-bold">
+                          ${formatUSD(tokenDetails?.liquidity.usd / 2)}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </div>
