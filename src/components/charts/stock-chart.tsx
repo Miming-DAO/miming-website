@@ -6,13 +6,13 @@ import { useEffect } from "react";
 
 export function StockChart() {
   useEffect(() => {
-    let root = am5.Root.new("chartdiv");
+    const root = am5.Root.new("chartdiv");
 
-    let stockChart = root.container.children.push(
+    const stockChart = root.container.children.push(
       am5stock.StockChart.new(root, {})
     );
 
-    let mainPanel = stockChart.panels.push(
+    const mainPanel = stockChart.panels.push(
       am5stock.StockPanel.new(root, {
         wheelY: "zoomX",
         panX: true,
@@ -20,13 +20,13 @@ export function StockChart() {
       })
     );
 
-    let valueAxis = mainPanel.yAxes.push(
+    const valueAxis = mainPanel.yAxes.push(
       am5xy.ValueAxis.new(root, {
         renderer: am5xy.AxisRendererY.new(root, {}),
       })
     );
 
-    let dateAxis = mainPanel.xAxes.push(
+    const dateAxis = mainPanel.xAxes.push(
       am5xy.DateAxis.new(root, {
         baseInterval: { timeUnit: "hour", count: 1 },
         renderer: am5xy.AxisRendererX.new(root, {}),
@@ -40,7 +40,7 @@ export function StockChart() {
       .get("renderer")
       .labels.template.setAll({ fill: am5.color("#ffffff") });
 
-    let candlestickSeries = mainPanel.series.push(
+    const candlestickSeries = mainPanel.series.push(
       am5xy.CandlestickSeries.new(root, {
         name: "SOL/USD",
         valueXField: "date",
@@ -59,7 +59,7 @@ export function StockChart() {
 
     stockChart.set("stockSeries", candlestickSeries);
 
-    let cursor = mainPanel.set("cursor", am5xy.XYCursor.new(root, {}));
+    const cursor = mainPanel.set("cursor", am5xy.XYCursor.new(root, {}));
     cursor.lineY.set("visible", false);
 
     async function fetchData() {
@@ -76,7 +76,13 @@ export function StockChart() {
         }
 
         const chartData = json.data.attributes.ohlcv_list.map(
-          ([timestamp, open, high, low, close]) => ({
+          ([timestamp, open, high, low, close]: [
+            number,
+            string,
+            string,
+            string,
+            string
+          ]) => ({
             date: timestamp * 1000, // Convert UNIX timestamp to milliseconds
             open: parseFloat(open),
             high: parseFloat(high),

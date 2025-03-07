@@ -107,7 +107,7 @@ export function ChartSection() {
           Chart
         </h2>
         <div className="flex flex-col gap-4">
-          <div className="flex gap-4">
+          <div className="flex gap-4 flex-wrap md:flex-no-wrap">
             <div className="p-4 rounded-lg bg-[#ffffff30] flex flex-col items-center flex-1">
               <span className="text-sm font-bold opacity-50">PRICE USD</span>
               <p className="font-bold text-xl">${tokenDetails?.priceUsd}</p>
@@ -133,11 +133,11 @@ export function ChartSection() {
               <p className="font-bold text-xl">${tokenDetails?.marketCap}</p>
             </div>
           </div>
-          <div className="flex gap-4">
+          <div className="flex gap-4 flex-col md:flex-row">
             <div className="p-8 rounded-lg bg-[#ffffff30] flex-1">
               <StockChart />
             </div>
-            <div className="flex flex-col gap-4 w-1/4">
+            <div className="flex flex-col gap-4 w-full md:w-[400px]">
               <div className="p-4 rounded-lg bg-[#ffffff30]">
                 <div className="border border-[#ffffff66] rounded-lg overflow-hidden">
                   <ul className="flex border-b border-[#ffffff66]">
