@@ -2,7 +2,7 @@
 import * as am5 from "@amcharts/amcharts5";
 import * as am5xy from "@amcharts/amcharts5/xy";
 import * as am5stock from "@amcharts/amcharts5/stock";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export function StockChart() {
   useEffect(() => {
@@ -12,7 +12,6 @@ export function StockChart() {
       am5stock.StockChart.new(root, {})
     );
 
-    // Create Main Panel for Candlestick Chart
     let mainPanel = stockChart.panels.push(
       am5stock.StockPanel.new(root, {
         wheelY: "zoomX",
@@ -21,7 +20,6 @@ export function StockChart() {
       })
     );
 
-    // Create Axes
     let valueAxis = mainPanel.yAxes.push(
       am5xy.ValueAxis.new(root, {
         renderer: am5xy.AxisRendererY.new(root, {}),
@@ -30,12 +28,11 @@ export function StockChart() {
 
     let dateAxis = mainPanel.xAxes.push(
       am5xy.DateAxis.new(root, {
-        baseInterval: { timeUnit: "day", count: 1 },
+        baseInterval: { timeUnit: "minute", count: 1 }, // Adjust based on data granularity
         renderer: am5xy.AxisRendererX.new(root, {}),
       })
     );
 
-    // ✅ **Set Labels to White**
     valueAxis
       .get("renderer")
       .labels.template.setAll({ fill: am5.color("#ffffff") });
@@ -43,7 +40,6 @@ export function StockChart() {
       .get("renderer")
       .labels.template.setAll({ fill: am5.color("#ffffff") });
 
-    // 📌 **Candlestick Chart for SOL/USD**
     let candlestickSeries = mainPanel.series.push(
       am5xy.CandlestickSeries.new(root, {
         name: "SOL/USD",
@@ -61,30 +57,44 @@ export function StockChart() {
       })
     );
 
-    // 📊 **Generate 100+ Data Points (Rising & Falling)**
-    let solanaData = [];
-    let startPrice = 95;
-    let volatility = 5;
-
-    for (let i = 0; i < 100; i++) {
-      let date = new Date(2024, 0, i + 1).getTime();
-      let open = startPrice + (Math.random() - 0.5) * volatility;
-      let high = open + Math.random() * volatility;
-      let low = open - Math.random() * volatility;
-      let close = low + Math.random() * (high - low);
-
-      solanaData.push({ date, open, high, low, close });
-
-      startPrice = close; // Continue from last close
-    }
-
-    candlestickSeries.data.setAll(solanaData);
-
     stockChart.set("stockSeries", candlestickSeries);
 
-    // Add Cursor & Scrollbar for better interaction
     let cursor = mainPanel.set("cursor", am5xy.XYCursor.new(root, {}));
     cursor.lineY.set("visible", false);
+
+    async function fetchData() {
+      try {
+        const response = await fetch(
+          "https://public-api.birdeye.so/defi/history_price?address=2xEdQfv8sZWNRGwm3pT6YM5SVbS5UgdMkfSx29VUC9Dt&timeframe=1h",
+          {
+            headers: {
+              "X-API-KEY": "5fe1b79c1a1f46a99903d45891431084", // 🔹 Replace with your actual API key
+            },
+          }
+        );
+
+        const data = await response.json();
+
+        if (!data.success || !data.data || data.data.length === 0) {
+          console.error("Invalid API response", data);
+          return;
+        }
+
+        const chartData = data.data.map((entry: any) => ({
+          date: entry.t * 1000, // Convert UNIX timestamp to milliseconds
+          open: parseFloat(entry.o),
+          high: parseFloat(entry.h),
+          low: parseFloat(entry.l),
+          close: parseFloat(entry.c),
+        }));
+
+        candlestickSeries.data.setAll(chartData);
+      } catch (error) {
+        console.error("Error fetching OHLCV data:", error);
+      }
+    }
+
+    fetchData();
 
     return () => {
       root.dispose();
