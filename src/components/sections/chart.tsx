@@ -151,9 +151,19 @@ export function ChartSection() {
                         className="flex flex-col font-bold w-full h-full justify-center items-center"
                       >
                         <span className="text-sm opacity-50">5M</span>
-                        {tokenDetails?.priceChange.m5
-                          ? tokenDetails?.priceChange.m5.toString() + "%"
-                          : "N/A"}
+                        <span
+                          className={`text-md ${
+                            tokenDetails?.priceChange.m5
+                              ? tokenDetails.priceChange.m5 > 0
+                                ? "text-green-500"
+                                : "text-red-400"
+                              : "opacity-50"
+                          }`}
+                        >
+                          {tokenDetails?.priceChange.m5
+                            ? tokenDetails?.priceChange.m5.toString() + "%"
+                            : "N/A"}
+                        </span>
                       </button>
                     </li>
                     <li
@@ -166,7 +176,15 @@ export function ChartSection() {
                         className="flex flex-col font-bold w-full h-full justify-center items-center"
                       >
                         <span className="text-sm opacity-50">1H</span>
-                        <span className="text-md">
+                        <span
+                          className={`text-md ${
+                            tokenDetails?.priceChange.h1
+                              ? tokenDetails.priceChange.h1 > 0
+                                ? "text-green-500"
+                                : "text-red-400"
+                              : "opacity-50"
+                          }`}
+                        >
                           {tokenDetails?.priceChange.h1
                             ? tokenDetails?.priceChange.h1.toString() + "%"
                             : "N/A"}
@@ -183,7 +201,15 @@ export function ChartSection() {
                         className="flex flex-col font-bold w-full h-full justify-center items-center"
                       >
                         <span className="text-sm opacity-50">6H</span>
-                        <span className="text-md">
+                        <span
+                          className={`text-md ${
+                            tokenDetails?.priceChange.h6
+                              ? tokenDetails.priceChange.h6 > 0
+                                ? "text-green-500"
+                                : "text-red-400"
+                              : "opacity-50"
+                          }`}
+                        >
                           {tokenDetails?.priceChange.h6
                             ? tokenDetails?.priceChange.h6.toString() + "%"
                             : "N/A"}
@@ -200,7 +226,15 @@ export function ChartSection() {
                         className="flex flex-col font-bold w-full h-full justify-center items-center"
                       >
                         <span className="text-sm opacity-50">24H</span>
-                        <span className="text-md">
+                        <span
+                          className={`text-md ${
+                            tokenDetails?.priceChange.h24
+                              ? tokenDetails.priceChange.h24 > 0
+                                ? "text-green-500"
+                                : "text-red-400"
+                              : "opacity-50"
+                          }`}
+                        >
                           {tokenDetails?.priceChange.h24
                             ? tokenDetails?.priceChange.h24.toString() + "%"
                             : "N/A"}

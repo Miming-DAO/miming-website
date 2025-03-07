@@ -39,7 +39,7 @@ export function VersusPercentage({
               width: `${per_2 ? per_2 : "50"}%`,
             }}
           >
-            <div className="bg-red-500 h-1 rounded-lg w-full"></div>
+            <div className="bg-red-400 h-1 rounded-lg w-full"></div>
           </div>
         </div>
       </div>
