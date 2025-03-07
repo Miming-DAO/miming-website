@@ -1,3 +1,4 @@
+import { ChartSection } from "@/components/sections/chart";
 import { HomeSection } from "@/components/sections/home";
 import { OurStorySection } from "@/components/sections/our-story";
 import { RoadmapSection } from "@/components/sections/roadmap";
@@ -10,6 +11,7 @@ export default function Home() {
       <HomeSection />
       <OurStorySection />
       <TokenomicsSection />
+      <ChartSection />
       <UtilitySection />
       <RoadmapSection />
     </div>
@@ -19,4 +21,4 @@ export default function Home() {
 export const metadata = {
   title: "$MIMING",
   description: "MIMING Bridge",
-}
+};
