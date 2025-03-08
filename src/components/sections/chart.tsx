@@ -102,7 +102,7 @@ export function ChartSection() {
   };
 
   const formatThousands = (value: number) => {
-    let formatted = Number(value).toLocaleString("en-US", {
+    const formatted = Number(value).toLocaleString("en-US", {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,
     });
