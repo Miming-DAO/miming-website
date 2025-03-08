@@ -5,6 +5,7 @@ import { StockChart } from "../charts/stock-chart";
 import { BuySells, TokenDetails } from "@/models/token-details.model";
 import { getLatestTokenDetails } from "@/services/dexscreener.service";
 import { VersusPercentage } from "../_partials/versus-percentage";
+import { Coin } from "../_partials/coin";
 
 export function ChartSection() {
   const [tokenDetails, setTokenDetails] = useState<TokenDetails | null>(null);
@@ -60,7 +61,7 @@ export function ChartSection() {
       setActiveTxns(tokenDetails?.txns.h24);
     }
     if (tokenDetails?.volume.h24) {
-      setActiveVolume(tokenDetails?.volume.h1);
+      setActiveVolume(tokenDetails?.volume.h24);
     }
   };
 
@@ -100,6 +101,24 @@ export function ChartSection() {
     return `${diffDays}d ${diffHours}h ago`;
   };
 
+  const formatThousands = (value: number) => {
+    const formatted = Number(value).toLocaleString("en-US", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+
+    // Remove .00 if present
+    return formatted.endsWith(".00") ? formatted.slice(0, -3) : formatted;
+  };
+
+  const formatDate = (date: Date) => {
+    return new Date(date).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+  };
+
   return (
     <div className="bg-gradient-to-r from-[#001036] to-[#8a0439]">
       <div className="py-20 px-4">
@@ -115,22 +134,26 @@ export function ChartSection() {
             <div className="p-4 rounded-lg bg-[#ffffff30] flex flex-col items-center flex-1">
               <span className="text-sm font-bold opacity-50">PRICE</span>
               <p className="font-bold text-xl">
-                {tokenDetails?.priceNative} SOL
+                {tokenDetails?.priceNative} <Coin type="sol" /> $SOL
               </p>
             </div>
             <div className="p-4 rounded-lg bg-[#ffffff30] flex flex-col items-center flex-1">
               <span className="text-sm font-bold opacity-50">LIQUIDITY</span>
               <p className="font-bold text-xl">
-                ${tokenDetails?.liquidity.usd}
+                ${formatUSD(tokenDetails?.liquidity.usd)}
               </p>
             </div>
             <div className="p-4 rounded-lg bg-[#ffffff30] flex flex-col items-center flex-1">
               <span className="text-sm font-bold opacity-50">FDV</span>
-              <p className="font-bold text-xl">${tokenDetails?.fdv}</p>
+              <p className="font-bold text-xl">
+                ${formatUSD(tokenDetails?.fdv)}
+              </p>
             </div>
             <div className="p-4 rounded-lg bg-[#ffffff30] flex flex-col items-center flex-1">
               <span className="text-sm font-bold opacity-50">MARKET CAP</span>
-              <p className="font-bold text-xl">${tokenDetails?.marketCap}</p>
+              <p className="font-bold text-xl">
+                ${formatUSD(tokenDetails?.marketCap)}
+              </p>
             </div>
           </div>
           <div className="flex gap-4 flex-col md:flex-row">
@@ -139,6 +162,9 @@ export function ChartSection() {
             </div>
             <div className="flex flex-col gap-4 w-full md:w-[400px]">
               <div className="p-4 rounded-lg bg-[#ffffff30]">
+                <h4 className="mb-2 font-bold text-right">
+                  {formatDate(new Date())}
+                </h4>
                 <div className="border border-[#ffffff66] rounded-lg overflow-hidden">
                   <ul className="flex border-b border-[#ffffff66]">
                     <li
@@ -270,7 +296,7 @@ export function ChartSection() {
                     <div className="flex">
                       <div className="w-1/3 px-4 border-r border-[#ffffff66] flex flex-col font-bold justify-center items-start">
                         <span className="text-xs opacity-50">VOLUME</span>
-                        <span>${activeVolume && activeVolume.toString()}</span>
+                        <span>${activeVolume && formatUSD(activeVolume)}</span>
                       </div>
                       <div></div>
                     </div>
@@ -296,10 +322,12 @@ export function ChartSection() {
                       </span>
                     </div>
                     <div className="flex justify-between items-center gap-4 border-b py-2 border-[#ffffff66]">
-                      <span>Pooled MIMING</span>
+                      <span>
+                        Pooled <Coin type="miming" /> $MIMING
+                      </span>
                       <div className="flex items-center gap-2">
                         <span className="font-bold">
-                          {tokenDetails?.liquidity.base}
+                          {formatThousands(tokenDetails?.liquidity.base)}
                         </span>
                         <span className="font-bold">
                           ${formatUSD(tokenDetails?.liquidity.usd / 2)}
@@ -307,10 +335,12 @@ export function ChartSection() {
                       </div>
                     </div>
                     <div className="flex justify-between items-center gap-4 border-b py-2 border-[#ffffff66]">
-                      <span>Pooled sol</span>
+                      <span>
+                        Pooled <Coin type="sol" /> $SOL
+                      </span>
                       <div className="flex items-center gap-2">
                         <span className="font-bold">
-                          {tokenDetails?.liquidity.quote}
+                          {formatThousands(tokenDetails?.liquidity.quote)}
                         </span>
                         <span className="font-bold">
                           ${formatUSD(tokenDetails?.liquidity.usd / 2)}
