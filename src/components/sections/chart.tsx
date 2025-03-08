@@ -5,6 +5,7 @@ import { StockChart } from "../charts/stock-chart";
 import { BuySells, TokenDetails } from "@/models/token-details.model";
 import { getLatestTokenDetails } from "@/services/dexscreener.service";
 import { VersusPercentage } from "../_partials/versus-percentage";
+import { Coin } from "../_partials/coin";
 
 export function ChartSection() {
   const [tokenDetails, setTokenDetails] = useState<TokenDetails | null>(null);
@@ -133,7 +134,7 @@ export function ChartSection() {
             <div className="p-4 rounded-lg bg-[#ffffff30] flex flex-col items-center flex-1">
               <span className="text-sm font-bold opacity-50">PRICE</span>
               <p className="font-bold text-xl">
-                {tokenDetails?.priceNative} $SOL
+                {tokenDetails?.priceNative} <Coin type="sol" /> $SOL
               </p>
             </div>
             <div className="p-4 rounded-lg bg-[#ffffff30] flex flex-col items-center flex-1">
@@ -321,7 +322,9 @@ export function ChartSection() {
                       </span>
                     </div>
                     <div className="flex justify-between items-center gap-4 border-b py-2 border-[#ffffff66]">
-                      <span>Pooled $MIMING</span>
+                      <span>
+                        Pooled <Coin type="miming" /> $MIMING
+                      </span>
                       <div className="flex items-center gap-2">
                         <span className="font-bold">
                           {formatThousands(tokenDetails?.liquidity.base)}
@@ -332,7 +335,9 @@ export function ChartSection() {
                       </div>
                     </div>
                     <div className="flex justify-between items-center gap-4 border-b py-2 border-[#ffffff66]">
-                      <span>Pooled $SOL</span>
+                      <span>
+                        Pooled <Coin type="sol" /> $SOL
+                      </span>
                       <div className="flex items-center gap-2">
                         <span className="font-bold">
                           {formatThousands(tokenDetails?.liquidity.quote)}
