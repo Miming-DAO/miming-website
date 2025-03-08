@@ -3,6 +3,8 @@ import * as am5 from "@amcharts/amcharts5";
 import * as am5xy from "@amcharts/amcharts5/xy";
 import * as am5stock from "@amcharts/amcharts5/stock";
 import { useEffect } from "react";
+import { getChartHistoryData } from "@/services/geckoterminal.service";
+import { ChartHistory } from "@/models/chart-history.model";
 
 export function StockChart() {
   useEffect(() => {
@@ -63,38 +65,11 @@ export function StockChart() {
     cursor.lineY.set("visible", false);
 
     async function fetchData() {
-      try {
-        const response = await fetch(
-          "https://api.geckoterminal.com/api/v2/networks/solana/pools/GiCFWE4ATRtTpYtQZv1prcitb5V9M1GdonJMLFLxLSa5/ohlcv/hour"
-        );
-
-        const json = await response.json();
-
-        if (!json.data?.attributes?.ohlcv_list) {
-          console.error("Invalid API response", json);
-          return;
+      getChartHistoryData("hour").then((chartData: ChartHistory[] | null) => {
+        if (chartData) {
+          candlestickSeries.data.setAll(chartData);
         }
-
-        const chartData = json.data.attributes.ohlcv_list.map(
-          ([timestamp, open, high, low, close]: [
-            number,
-            string,
-            string,
-            string,
-            string
-          ]) => ({
-            date: timestamp * 1000, // Convert UNIX timestamp to milliseconds
-            open: parseFloat(open),
-            high: parseFloat(high),
-            low: parseFloat(low),
-            close: parseFloat(close),
-          })
-        );
-
-        candlestickSeries.data.setAll(chartData);
-      } catch (error) {
-        console.error("Error fetching OHLCV data:", error);
-      }
+      });
     }
 
     fetchData();
