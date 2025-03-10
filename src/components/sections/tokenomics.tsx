@@ -1,3 +1,5 @@
+/* eslint-disable @next/next/no-img-element */
+
 export function TokenomicsSection() {
   return (
     <section
@@ -13,14 +15,14 @@ export function TokenomicsSection() {
           <div className="w-1/9">
             <div className="flex items-center gap-2 text-accent">
               <a href="https://drive.google.com/file/d/1m0bjwGnKqHL21GC0izfHvEVQpDExpbFj/view?usp=sharing">
-              <img
-                src="/images/social/file-yellow.png"
-                alt=""
-                className="h-6"
-              />
+                <img
+                  src="/images/social/file-yellow.png"
+                  alt="miming whitepaper icon"
+                  className="h-6"
+                />
               </a>
               <a href="https://drive.google.com/file/d/1m0bjwGnKqHL21GC0izfHvEVQpDExpbFj/view?usp=sharing">
-              $MIMING Whitepaper
+                $MIMING Whitepaper
               </a>
             </div>
           </div>
@@ -29,6 +31,7 @@ export function TokenomicsSection() {
               <img
                 src="/images/miming-logo.png"
                 className="h-auto w-[20%] absolute right-[28%] top-[40%]"
+                alt="miming coin icon"
               />
               <svg
                 xmlns="http://www.w3.org/2000/svg"

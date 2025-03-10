@@ -1,3 +1,5 @@
+/* eslint-disable @next/next/no-img-element */
+
 export function RoadmapSection() {
   return (
     <section
@@ -17,7 +19,11 @@ export function RoadmapSection() {
               <div className="flex-1 flex items-center gap-2 lg:flex-row-reverse">
                 <div className="h-2 rounded flex-1 bg-[#6099b4] min-w-6"></div>
                 <div className="bg-[#5c0f74] rounded-lg flex items-center justify-center w-32">
-                  <img src="/images/miming-cat.png" className="w-20" alt="" />
+                  <img
+                    src="/images/miming-cat.png"
+                    className="w-20"
+                    alt="miming cat avatar image"
+                  />
                 </div>
                 <div className="w-full lg:w-[350px]">
                   <h3 className="text-lg">Phase 1: Journey Begins</h3>
@@ -39,7 +45,7 @@ export function RoadmapSection() {
                   <img
                     src="/images/miming-stairs.png"
                     className="h-20 object-cover"
-                    alt=""
+                    alt="Solana and Xode world with a bridge in between"
                   />
                 </div>
                 <div className="w-full lg:w-[350px]">
@@ -61,7 +67,7 @@ export function RoadmapSection() {
                   <img
                     src="/images/miming-transparent.png"
                     className="h-20 object-cover"
-                    alt=""
+                    alt="miming cat crossing the bridge between Solana and Xode worlds"
                   />
                 </div>
                 <div className="w-full lg:w-[350px]">
@@ -80,7 +86,11 @@ export function RoadmapSection() {
               <div className="flex-1 flex items-center gap-2">
                 <div className="h-2 rounded flex-1 bg-[#6099b4] min-w-6 min-w-6"></div>
                 <div className="bg-[#5c0f74] rounded-lg flex items-center justify-center w-32">
-                  <img src="/images/miming-logo.png" className="w-20" alt="" />
+                  <img
+                    src="/images/miming-logo.png"
+                    className="w-20"
+                    alt="Miming Icon"
+                  />
                 </div>
                 <div className="w-full lg:w-[350px]">
                   <h3 className="text-lg">Phase 4: Synergy</h3>
