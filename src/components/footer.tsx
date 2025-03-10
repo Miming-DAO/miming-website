@@ -1,23 +1,39 @@
+/* eslint-disable @next/next/no-img-element */
+
 export function Footer() {
   return (
     <div className="container mx-auto bg-black">
       <div className="py-16 px-4 flex flex-col sm:flex-row items-center justify-between">
         <div className="flex items-center justify-center sm:justify-start">
-          <img src="/images/miming-logo.png" className="size-28 sm:size-32" />
+          <img
+            alt="miming logo"
+            src="/images/miming-logo.png"
+            className="size-28 sm:size-32"
+          />
           <span className="text-[3em] font-bold text-darumadrop text-[#e50f72]">
             $MIMING
           </span>
         </div>
         <div className="flex flex-col items-center sm:items-start">
           <div className="flex flex-col sm:flex-row items-center sm:gap-2 justify-center">
-            <img src="/images/solana-logo.webp" className="h-4" alt="" />
+            <img
+              alt="solana logo"
+              src="/images/solana-logo.webp"
+              className="h-4"
+            />
             <p>Solana CA:</p>
-            <p><small>2xEdQfv8sZWNRGwm3pT6YM5SVbS5UgdMkfSx29VUC9Dt</small></p>
+            <p>
+              <small>2xEdQfv8sZWNRGwm3pT6YM5SVbS5UgdMkfSx29VUC9Dt</small>
+            </p>
           </div>
           <ul className="flex justify-center items-center mt-2 gap-2">
             <li>
               <a href="https://x.com/mimingcoin">
-              <img src="/images/social/x.png" className="size-6" alt="" />
+                <img
+                  src="/images/social/x.png"
+                  className="size-6"
+                  alt="x logo"
+                />
               </a>
             </li>
             <li>
@@ -46,10 +62,22 @@ export function Footer() {
               </a>
             </li>
             <li>
-              <a href="https://github.com/Miming-DAO"><img src="/images/social/github.png" className="size-6" alt="" /></a>
+              <a href="https://github.com/Miming-DAO">
+                <img
+                  src="/images/social/github.png"
+                  className="size-6"
+                  alt="github logo"
+                />
+              </a>
             </li>
             <li>
-              <a href="https://drive.google.com/file/d/1m0bjwGnKqHL21GC0izfHvEVQpDExpbFj/view?usp=sharing"><img src="/images/social/copy.png" className="size-6" alt="" /></a>
+              <a href="https://drive.google.com/file/d/1m0bjwGnKqHL21GC0izfHvEVQpDExpbFj/view?usp=sharing">
+                <img
+                  src="/images/social/copy.png"
+                  className="size-6"
+                  alt="miming whitepaper"
+                />
+              </a>
             </li>
           </ul>
         </div>

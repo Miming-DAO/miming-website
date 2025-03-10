@@ -1,3 +1,5 @@
+/* eslint-disable @next/next/no-img-element */
+
 export function HomeSection() {
   return (
     <section className="min-h-screen pt-52 flex flex-col justify-end p-20 sm:p-10">
@@ -11,14 +13,18 @@ export function HomeSection() {
           <img
             src="/images/solana-logo.webp"
             className="h-4 hidden sm:block"
-            alt=""
+            alt="solana logo"
           />
           <p>Solana CA:</p>
-          <p><small>2xEdQfv8sZWNRGwm3pT6YM5SVbS5UgdMkfSx29VUC9Dt</small></p>
+          <p>
+            <small>2xEdQfv8sZWNRGwm3pT6YM5SVbS5UgdMkfSx29VUC9Dt</small>
+          </p>
         </div>
         <ul className="flex justify-center items-center mt-2 gap-2">
           <li>
-          <a href="https://x.com/mimingcoin"><img src="/images/social/x.png" className="size-6" alt="" /></a>
+            <a href="https://x.com/mimingcoin">
+              <img src="/images/social/x.png" className="size-6" alt="x logo" />
+            </a>
           </li>
           <li>
             <a href="https://t.me/+l8QZJZ9D1UtjYWI1">
@@ -46,10 +52,22 @@ export function HomeSection() {
             </a>
           </li>
           <li>
-            <a href="https://github.com/Miming-DAO"><img src="/images/social/github.png" className="size-6" alt="" /></a>
+            <a href="https://github.com/Miming-DAO">
+              <img
+                src="/images/social/github.png"
+                className="size-6"
+                alt="github logo"
+              />
+            </a>
           </li>
           <li>
-            <a href="https://drive.google.com/file/d/1m0bjwGnKqHL21GC0izfHvEVQpDExpbFj/view?usp=sharing"><img src="/images/social/copy.png" className="size-6" alt="" /></a>
+            <a href="https://drive.google.com/file/d/1m0bjwGnKqHL21GC0izfHvEVQpDExpbFj/view?usp=sharing">
+              <img
+                src="/images/social/copy.png"
+                className="size-6"
+                alt="miming whitepaper"
+              />
+            </a>
           </li>
         </ul>
       </div>
