@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 
+import { SolanaAddress } from "./_partials/solana-address";
 import { Socials } from "./navigations/socials";
 
 export function Footer() {
@@ -17,17 +18,7 @@ export function Footer() {
           </span>
         </div>
         <div className="flex flex-col items-center sm:items-start">
-          <div className="flex flex-col sm:flex-row items-center sm:gap-2 justify-center">
-            <img
-              alt="solana logo"
-              src="/images/solana-logo.webp"
-              className="h-4"
-            />
-            <p>Solana CA:</p>
-            <p>
-              <small>2xEdQfv8sZWNRGwm3pT6YM5SVbS5UgdMkfSx29VUC9Dt</small>
-            </p>
-          </div>
+          <SolanaAddress />
           <Socials />
         </div>
       </div>
